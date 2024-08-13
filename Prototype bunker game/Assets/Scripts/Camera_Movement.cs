@@ -9,9 +9,16 @@ public class Camera_Movement : MonoBehaviour
 
     Vector2 moveDirection;
     Rigidbody2D rb2D;
-    // Start is called before the first frame update
+
+    [Header("Camera zooms")]
+    public Camera cam;
+    public bool IsZoomed;
+
+    // Explain all of this code :3
     void Start()
     {
+        IsZoomed = false;
+
         rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -20,15 +27,28 @@ public class Camera_Movement : MonoBehaviour
         Move();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
         transform.position = new Vector2(
-            Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
-            Mathf.Clamp(transform.position.y, bottomLimit, topLimit));
+        Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+        Mathf.Clamp(transform.position.y, bottomLimit, topLimit));
+
+        // Zooms camera in
+        if(Input.GetKeyDown(KeyCode.E) && !IsZoomed){
+            IsZoomed = true;
+            cam.orthographicSize = 8;
+            //Debug.Log("zoom in");
+        } else{ // Zooms camera out
+            if(Input.GetKeyDown(KeyCode.E) && IsZoomed){
+                IsZoomed = false;
+                cam.orthographicSize = 12;
+                //Debug.Log("zoom out");
+            }
+        }
+
     }
-        void Move()
+
+    void Move()
     {
         moveDirection.x = Input.GetAxisRaw("Horizontal");
         moveDirection.y = Input.GetAxisRaw("Vertical");
