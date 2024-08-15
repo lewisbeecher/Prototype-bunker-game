@@ -26,6 +26,8 @@ public class DragDrop2D : MonoBehaviour
     {
         // takes the prefab pos and moves it to the mouse position relative to world pos
         transform.position = MouseWorldPosition() + offset;
+        
+        // Make pop up show here or possibly another script
     }
 
     void OnMouseUp()
@@ -38,6 +40,7 @@ public class DragDrop2D : MonoBehaviour
         RaycastHit2D hitInfo;
         if (hitInfo = Physics2D.Raycast(rayOrigin, rayDirection))
         {
+            
             if (hitInfo.transform.tag == destinationTag)
             {
                 //Debug.Log(hitInfo.transform.name);
@@ -48,7 +51,17 @@ public class DragDrop2D : MonoBehaviour
             else{
                 rb.constraints = RigidbodyConstraints2D.None;
             }
+
+            if(hitInfo.transform.name == "ExileDoor")
+            {
+                Destroy(this.gameObject);
+                Debug.Log("Big fuck off fucking green door");
+                Debug.Log("waa bosh");
+            }
         }
+
+        collider2d.enabled = true;
+
     }
 
     Vector3 MouseWorldPosition()

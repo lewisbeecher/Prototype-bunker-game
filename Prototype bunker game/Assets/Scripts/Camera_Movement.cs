@@ -41,7 +41,7 @@ public class Camera_Movement : MonoBehaviour
         } else{ // Zooms camera out
             if(Input.GetKeyDown(KeyCode.E) && IsZoomed){
                 IsZoomed = false;
-                cam.orthographicSize = 12;
+                cam.orthographicSize = 15;
                 //Debug.Log("zoom out");
             }
         }
